@@ -10,12 +10,30 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
+
+// Improved configuration for better scalability
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], {
+    ...config,
+    logging: process.env.DB_LOGGING === 'true', // Control logging via environment variable
+  });
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password, {
+    ...config,
+    logging: process.env.DB_LOGGING === 'true', // Control logging via environment variable
+  });
 }
 
+// Database connection error handling
+sequelize.authenticate()
+  .then(() => {
+    console.log('Database connection established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+// Dynamically load all models
 fs
   .readdirSync(__dirname)
   .filter(file => {
