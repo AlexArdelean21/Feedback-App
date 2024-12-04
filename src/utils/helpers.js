@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const { Activity } = require('../models');
+const { Activity } = require('../../models');
 
 //Generates a 6-character alphanumeric access code.
 //Avoids confusing characters like '0', 'O', 'I', and 'l'.

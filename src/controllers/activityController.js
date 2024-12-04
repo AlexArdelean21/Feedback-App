@@ -1,5 +1,5 @@
 const { body, validationResult } = require('express-validator');
-const { Activity } = require('../models');
+const { Activity } = require('../../models');
 const { generateUniqueAccessCode } = require('../utils/helpers');
 
 exports.createActivity = [

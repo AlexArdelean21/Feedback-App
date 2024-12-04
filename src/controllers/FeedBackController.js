@@ -1,5 +1,5 @@
 const { body, validationResult } = require('express-validator');
-const { Feedback, Activity } = require('../models');
+const { Feedback, Activity } = require('../../models');
 
 exports.submitFeedback = [
   // Validation middleware
