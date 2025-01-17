@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Activity = sequelize.define('Activity', {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       description: {

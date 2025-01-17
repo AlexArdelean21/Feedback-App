@@ -24,10 +24,10 @@ exports.createActivity = [
         return res.status(400).json({ error: 'Start time must be before end time' });
       }
 
-      const accessCode = generateUniqueAccessCode();
+      const accessCode = await generateUniqueAccessCode();
       const activity = await Activity.create({
         description,
-        accessCode,
+        accessCode: String(accessCode), // Ensure it's explicitly cast to a string
         startTime,
         endTime,
       });
