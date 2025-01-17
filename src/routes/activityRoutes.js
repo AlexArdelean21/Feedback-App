@@ -4,6 +4,33 @@ const activityController = require('../controllers/activityController');
 
 /**
  * @swagger
+ * /activities/access-code/{accessCode}:
+ *   get:
+ *     summary: Get activity by access code
+ *     tags: [Activities]
+ *     parameters:
+ *       - in: path
+ *         name: accessCode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The unique access code of the activity
+ *     responses:
+ *       200:
+ *         description: The activity data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Activity'
+ *       404:
+ *         description: Activity not found
+ *       500:
+ *         description: Server error
+ */
+router.get('/access-code/:accessCode', activityController.getActivityByAccessCode);
+
+/**
+ * @swagger
  * /activities:
  *   post:
  *     summary: Create a new activity

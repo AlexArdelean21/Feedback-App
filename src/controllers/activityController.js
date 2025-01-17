@@ -95,3 +95,20 @@ exports.deleteActivity = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getActivityByAccessCode = async (req, res) => {
+  try {
+    const { accessCode } = req.params;
+
+    // Find the activity by accessCode
+    const activity = await Activity.findOne({ where: { accessCode } });
+
+    if (!activity) {
+      return res.status(404).json({ error: 'Activity not found' });
+    }
+
+    res.status(200).json(activity);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

@@ -1,0 +1,50 @@
+.homepage-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: row;
+    position: relative;
+    font-family: Arial, sans-serif;
+  }
+  
+  .split {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .split.left {
+    background-color: #f0f8ff; /* Light blue */
+  }
+  
+  .split.right {
+    background-color: #ffe4e1; /* Light pink */
+  }
+  
+  .split:hover {
+    filter: brightness(0.9);
+  }
+  
+  .split h2 {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .center-question {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .center-question h1 {
+    font-size: 1.8rem;
+    color: #555;
+  }
