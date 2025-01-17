@@ -4,6 +4,8 @@ import '../styles/ProfessorPage.css';
 
 const ProfessorPage = () => {
   const [activities, setActivities] = useState([]);
+  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [feedback, setFeedback] = useState([]);
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -22,6 +24,7 @@ const ProfessorPage = () => {
       setActivities(response.data);
     } catch (error) {
       console.error('Error fetching activities:', error);
+      setError('Failed to fetch activities.');
     }
   };
 
@@ -36,10 +39,30 @@ const ProfessorPage = () => {
       });
       setSuccess('Activity created successfully!');
       setError('');
+      setDescription(''); // Clear form fields
+      setStartTime('');
+      setEndTime('');
       fetchActivities(); // Refresh activities list
     } catch (error) {
-      setError('Failed to create activity. Please check your input.');
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error); // Display backend error
+      } else {
+        setError('Failed to create activity. Please check your input.');
+      }
       setSuccess('');
+    }
+  };
+
+  // Fetch feedback for a specific activity
+  const fetchFeedback = async (activityId) => {
+    try {
+      const response = await axios.get(`/api/feedback/activity/${activityId}`);
+      setFeedback(response.data);
+      setSelectedActivity(activityId);
+      setError('');
+    } catch (error) {
+      console.error('Error fetching feedback:', error);
+      setError('Failed to fetch feedback for the selected activity.');
     }
   };
 
@@ -47,6 +70,7 @@ const ProfessorPage = () => {
     <div className="professor-page">
       <h1>Professor's Dashboard</h1>
 
+      {/* Create Activity Form */}
       <form onSubmit={createActivity} className="activity-form">
         <h2>Create Activity</h2>
         <div>
@@ -82,14 +106,43 @@ const ProfessorPage = () => {
       {error && <p className="error-message">{error}</p>}
       {success && <p className="success-message">{success}</p>}
 
+      {/* Activities List */}
       <h2>All Activities</h2>
-      <ul>
+      <ul className="activities-list">
         {activities.map((activity) => (
-          <li key={activity.id}>
-            {activity.description} (Start: {new Date(activity.startTime).toLocaleString()}, End: {new Date(activity.endTime).toLocaleString()})
+          <li key={activity.id} className="activity-item">
+            <div>
+              <strong>{activity.description}</strong>
+              <p>
+                Start: {new Date(activity.startTime).toLocaleString()}, End: {new Date(activity.endTime).toLocaleString()}
+              </p>
+            </div>
+            <button
+              className="view-feedback-button"
+              onClick={() => fetchFeedback(activity.id)}
+            >
+              View Feedback
+            </button>
           </li>
         ))}
       </ul>
+
+      {/* Feedback Section */}
+      {selectedActivity && (
+        <div className="feedback-section">
+          <h2>Feedback for Activity {selectedActivity}</h2>
+          <ul>
+            {feedback.map((item) => (
+              <li key={item.id} className="feedback-item">
+                <p>
+                  <strong>{item.emotion}</strong> at{' '}
+                  {new Date(item.createdAt).toLocaleTimeString()}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
