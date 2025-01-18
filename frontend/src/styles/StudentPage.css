@@ -1,70 +1,130 @@
+/* Updated StudentPage.css */
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  color: #333;
+}
+
 .student-page {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .access-code-form {
-    margin-bottom: 20px;
-  }
-  
-  .access-code-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .access-code-form button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .access-code-form button:hover {
-    background-color: #0056b3;
-  }
-  
-  .activity-details {
-    margin-top: 20px;
-  }
-  
-  .emoticons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .emotion-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s, border 0.2s;
-  }
-  
-  .emotion-button img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .emotion-button.selected {
-    border: 2px solid #007bff;
-    border-radius: 50%;
-    padding: 5px;
-  }
-  
-  .emotion-button:hover img {
-    transform: scale(1.1);
-  }
-  
-  .error-message {
-    color: red;
-  }
-  
-  .success-message {
-    color: green;
-  }
+  padding: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #007bff;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.access-code-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.access-code-form h2 {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.access-code-form input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.access-code-form button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.access-code-form button:hover {
+  background-color: #0056b3;
+}
+
+.activity-container {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.activity-details {
+  display: inline-block;
+  text-align: left;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  padding-left: 20px; 
+}
+
+.emoticons {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.emotion-button {
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.emotion-button img {
+  width: 60px;
+  height: 60px;
+}
+
+.emotion-button.selected {
+  border: 2px solid #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.emotion-button:hover img {
+  transform: scale(1.1);
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: center;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 14px;
+  text-align: center;
+}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/ProfessorPage.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProfessorPage = () => {
   const [activities, setActivities] = useState([]);
@@ -9,26 +11,20 @@ const ProfessorPage = () => {
   const [description, setDescription] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
-  // Fetch activities on component mount
   useEffect(() => {
     fetchActivities();
   }, []);
 
-  // Fetch all activities
   const fetchActivities = async () => {
     try {
       const response = await axios.get('/api/activities');
       setActivities(response.data);
     } catch (error) {
-      console.error('Error fetching activities:', error);
-      setError('Failed to fetch activities.');
+      toast.error('Failed to fetch activities.');
     }
   };
 
-  // Handle activity creation
   const createActivity = async (e) => {
     e.preventDefault();
     try {
@@ -37,40 +33,29 @@ const ProfessorPage = () => {
         startTime,
         endTime,
       });
-      setSuccess('Activity created successfully!');
-      setError('');
-      setDescription(''); // Clear form fields
+      toast.success('Activity created successfully!');
+      setDescription('');
       setStartTime('');
       setEndTime('');
-      fetchActivities(); // Refresh activities list
+      fetchActivities();
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        setError(error.response.data.error); // Display backend error
-      } else {
-        setError('Failed to create activity. Please check your input.');
-      }
-      setSuccess('');
+      toast.error(error.response?.data?.error || 'Failed to create activity.');
     }
   };
 
-  // Fetch feedback for a specific activity
   const fetchFeedback = async (activityId) => {
     try {
       const response = await axios.get(`/api/feedback/activity/${activityId}`);
       setFeedback(response.data);
       setSelectedActivity(activityId);
-      setError('');
     } catch (error) {
-      console.error('Error fetching feedback:', error);
-      setError('Failed to fetch feedback for the selected activity.');
+      toast.error('Failed to fetch feedback for the selected activity.');
     }
   };
 
   return (
     <div className="professor-page">
       <h1>Professor's Dashboard</h1>
-
-      {/* Create Activity Form */}
       <form onSubmit={createActivity} className="activity-form">
         <h2>Create Activity</h2>
         <div>
@@ -102,11 +87,6 @@ const ProfessorPage = () => {
         </div>
         <button type="submit">Create Activity</button>
       </form>
-
-      {error && <p className="error-message">{error}</p>}
-      {success && <p className="success-message">{success}</p>}
-
-      {/* Activities List */}
       <h2>All Activities</h2>
       <ul className="activities-list">
         {activities.map((activity) => (
@@ -116,6 +96,7 @@ const ProfessorPage = () => {
               <p>
                 Start: {new Date(activity.startTime).toLocaleString()}, End: {new Date(activity.endTime).toLocaleString()}
               </p>
+              <p>Access Code: <strong>{activity.accessCode}</strong></p>
             </div>
             <button
               className="view-feedback-button"
@@ -126,8 +107,6 @@ const ProfessorPage = () => {
           </li>
         ))}
       </ul>
-
-      {/* Feedback Section */}
       {selectedActivity && (
         <div className="feedback-section">
           <h2>Feedback for Activity {selectedActivity}</h2>
@@ -135,14 +114,25 @@ const ProfessorPage = () => {
             {feedback.map((item) => (
               <li key={item.id} className="feedback-item">
                 <p>
-                  <strong>{item.emotion}</strong> at{' '}
-                  {new Date(item.createdAt).toLocaleTimeString()}
+                  <strong>{item.emotion}</strong> at {new Date(item.createdAt).toLocaleTimeString()}
                 </p>
               </li>
             ))}
           </ul>
         </div>
       )}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

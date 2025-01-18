@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Feedback = sequelize.define('Feedback', {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
+      defaultValue: DataTypes.INTEGER,
       primaryKey: true,
     },
     emotion: {

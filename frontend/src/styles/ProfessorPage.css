@@ -1,95 +1,144 @@
+/* ProfessorPage.css */
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f3f4f6, #ffffff);
+  color: #333;
+}
+
 .professor-page {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.professor-page h1 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #007bff;
 }
 
 .activity-form {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  align-items: center;
 }
 
-.activity-form div {
-  margin-bottom: 10px;
+.activity-form h2 {
+  font-size: 20px;
+  color: #555;
+  text-align: center;
 }
 
-label {
-  display: block;
-  font-weight: bold;
+.activity-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-input {
+.activity-form input {
   width: 100%;
-  padding: 5px;
-  margin-top: 5px;
+  max-width: 400px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px;
 }
 
-button {
-  padding: 10px 20px;
+.activity-form button {
+  padding: 12px 20px;
+  font-size: 16px;
   background-color: #007bff;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
+.activity-form button:hover {
   background-color: #0056b3;
-}
-
-.error-message {
-  color: red;
-}
-
-.success-message {
-  color: green;
 }
 
 .activities-list {
   list-style-type: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 .activity-item {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.activity-item strong {
+  font-size: 18px;
+  color: #333;
 }
 
 .view-feedback-button {
-  padding: 5px 10px;
-  background-color: #28a745;
+  padding: 8px 12px;
+  background-color: #007bff;
   color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .view-feedback-button:hover {
-  background-color: #218838;
+  background-color: #0056b3;
 }
 
 .feedback-section {
   margin-top: 20px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.feedback-section h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #333;
+}
+
+.feedback-section ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .feedback-item {
-  margin: 10px 0;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.feedback-item:last-child {
+  border-bottom: none;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: center;
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 14px;
+  text-align: center;
 }
