@@ -20,30 +20,33 @@ const StudentPage = () => {
   const fetchActivity = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`/api/activities/access-code/${accessCode}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/activities/access-code/${accessCode}`);
       setActivity(response.data);
       setError('');
     } catch (error) {
       setError('Invalid access code. Please try again.');
-      toast.error('Invalid access code. Please try again.');
       setActivity(null);
     }
   };
-
-  const submitFeedback = async (emotion) => {
+  
+  const submitFeedback = async () => {
+    if (!selectedEmotion) {
+      toast.error('Please select an emotion before submitting.');
+      return;
+    }
+  
     try {
-      await axios.post('/api/feedback', { emotion, activityAccessCode: accessCode });
-      setSuccess(`Feedback for ${emotion} submitted successfully!`);
-      toast.success(`Feedback for ${emotion} submitted successfully!`);
-      setError('');
-      setSelectedEmotion(emotion);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/feedback`, {
+        activityId: activity.id,
+        emotion: selectedEmotion,
+      });
+      toast.success('Feedback submitted successfully!');
+      setSelectedEmotion('');
     } catch (error) {
-      setError('Failed to submit feedback. Please try again.');
-      toast.error('Failed to submit feedback. Please try again.');
-      setSuccess('');
+      toast.error('Failed to submit feedback.');
     }
   };
-
+  
   return (
     <div className="student-page">
       <header className="header">

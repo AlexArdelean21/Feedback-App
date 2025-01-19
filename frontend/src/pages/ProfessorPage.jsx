@@ -18,17 +18,17 @@ const ProfessorPage = () => {
 
   const fetchActivities = async () => {
     try {
-      const response = await axios.get('/api/activities');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/activities`);
       setActivities(response.data);
     } catch (error) {
       toast.error('Failed to fetch activities.');
     }
   };
-
+  
   const createActivity = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/activities', {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/activities`, {
         description,
         startTime,
         endTime,
@@ -42,10 +42,10 @@ const ProfessorPage = () => {
       toast.error(error.response?.data?.error || 'Failed to create activity.');
     }
   };
-
+  
   const fetchFeedback = async (activityId) => {
     try {
-      const response = await axios.get(`/api/feedback/activity/${activityId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/feedback/activity/${activityId}`);
       setFeedback(response.data);
       setSelectedActivity(activityId);
     } catch (error) {
