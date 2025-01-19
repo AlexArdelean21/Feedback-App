@@ -17,6 +17,12 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
+app.use('/src/assets', express.static(path.join(__dirname, 'frontend', 'src', 'assets')));
+
+// Serve favicon.ico
+app.use('/favicon.ico', express.static(path.join(__dirname, 'frontend', 'src', 'assets', 'favicon.ico')));
+
+
 // Routes
 const activityRoutes = require('./src/routes/activityRoutes');
 const feedbackRoutes = require('./src/routes/FeedBackRoutes');
