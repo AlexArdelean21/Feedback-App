@@ -2,19 +2,19 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    use_env_variable: 'DATABASE_URL', // Use DATABASE_URL for local development
     dialect: 'mysql',
-    logging: false, 
+    logging: process.env.DB_LOGGING === 'true', // Enable logging if DB_LOGGING is true
   },
   production: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
+    use_env_variable: 'DATABASE_URL', // Use DATABASE_URL for production
     dialect: 'mysql',
-    logging: false, 
+    dialectOptions: {
+      ssl: {
+        require: true, // Enable SSL for hosted database
+        rejectUnauthorized: false, // Avoid issues with self-signed certificates
+      },
+    },
+    logging: false, // Disable logging for production
   },
 };
