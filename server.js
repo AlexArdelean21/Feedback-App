@@ -3,8 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./src/swagger');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,8 +18,6 @@ app.use(cors({
 
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-
-app.use('/src/assets', express.static(path.join(__dirname, 'frontend', 'src', 'assets')));
 
 // Serve favicon.ico
 app.use('/favicon.ico', express.static(path.join(__dirname, 'frontend', 'src', 'assets', 'favicon.ico')));
