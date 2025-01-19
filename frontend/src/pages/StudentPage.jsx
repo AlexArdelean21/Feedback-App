@@ -36,13 +36,13 @@ const StudentPage = () => {
   
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/feedback`, {
-        activityId: activity.id,
         emotion: selectedEmotion,
+        activityAccessCode: activity.accessCode, // Ensure this matches the backend's expectation
       });
       toast.success('Feedback submitted successfully!');
       setSelectedEmotion('');
     } catch (error) {
-      toast.error('Failed to submit feedback.');
+      toast.error(error.response?.data?.error || 'Failed to submit feedback.');
     }
   };
   
