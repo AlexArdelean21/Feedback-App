@@ -12,7 +12,6 @@ const StudentPage = () => {
   const [accessCode, setAccessCode] = useState('');
   const [activity, setActivity] = useState(null);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [selectedEmotion, setSelectedEmotion] = useState('');
 
   const emotionImages = { smiley, frowny, surprised, confused };
@@ -83,7 +82,10 @@ const StudentPage = () => {
               <button
                 key={emotion}
                 className={`emotion-button ${selectedEmotion === emotion ? 'selected' : ''}`}
-                onClick={() => submitFeedback(emotion)}
+                onClick={() => {
+                  setSelectedEmotion(emotion); // Update the selected emotion
+                  submitFeedback(); // Submit feedback
+                }}
               >
                 <img src={emotionImages[emotion]} alt={emotion} />
               </button>
