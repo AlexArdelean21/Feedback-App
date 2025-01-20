@@ -43,13 +43,23 @@ const ProfessorPage = () => {
     }
   };
   
-  const fetchFeedback = async (activityId) => {
+  const fetchFeedback = async (activity) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/feedback/activity/${activityId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/feedback/activity/${activity.id}`);
       setFeedback(response.data);
-      setSelectedActivity(activityId);
+      setSelectedActivity(activity); // Store the full activity object
     } catch (error) {
       toast.error('Failed to fetch feedback for the selected activity.');
+    }
+  };
+
+  const deleteActivity = async (activityId) => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/activities/${activityId}`);
+      toast.success('Activity deleted successfully!');
+      fetchActivities();
+    } catch (error) {
+      toast.error('Failed to delete activity.');
     }
   };
 
@@ -98,18 +108,26 @@ const ProfessorPage = () => {
               </p>
               <p>Access Code: <strong>{activity.accessCode}</strong></p>
             </div>
-            <button
-              className="view-feedback-button"
-              onClick={() => fetchFeedback(activity.id)}
-            >
-              View Feedback
-            </button>
+            <div>
+              <button
+                className="view-feedback-button"
+                onClick={() => fetchFeedback(activity)}
+              >
+                View Feedback
+              </button>
+              <button
+                className="delete-activity-button"
+                onClick={() => deleteActivity(activity.id)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
       {selectedActivity && (
         <div className="feedback-section">
-          <h2>Feedback for Activity {selectedActivity}</h2>
+          <h2>Feedback for "{selectedActivity.description}"</h2>
           <ul>
             {feedback.map((item) => (
               <li key={item.id} className="feedback-item">

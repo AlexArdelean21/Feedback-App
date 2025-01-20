@@ -7,14 +7,14 @@ const Homepage = () => {
 
   return (
     <div className="homepage-container">
+      <div className="center-question">
+        <h1>Are you a professor or a student?</h1>
+      </div>
       <div className="split left" onClick={() => navigate('/professor')}>
         <h2>Professor</h2>
       </div>
       <div className="split right" onClick={() => navigate('/student')}>
         <h2>Student</h2>
-      </div>
-      <div className="center-question">
-        <h1>Are you a professor or a student?</h1>
       </div>
     </div>
   );

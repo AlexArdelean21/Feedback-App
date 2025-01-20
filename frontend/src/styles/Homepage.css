@@ -34,9 +34,9 @@
   
   .center-question {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
     background-color: white;
     padding: 20px 40px;

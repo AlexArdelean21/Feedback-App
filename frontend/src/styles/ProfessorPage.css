@@ -103,6 +103,21 @@ body {
   background-color: #0056b3;
 }
 
+.delete-activity-button {
+  padding: 8px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.delete-activity-button:hover {
+  background-color: #b02a37;
+}
+
 .feedback-section {
   margin-top: 20px;
   padding: 20px;

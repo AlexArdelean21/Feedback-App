@@ -62,7 +62,7 @@ const StudentPage = () => {
             onChange={(e) => setAccessCode(e.target.value)}
             required
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Join</button>
           {error && <p className="error-message">{error}</p>}
         </form>
       )}
@@ -84,7 +84,7 @@ const StudentPage = () => {
                 className={`emotion-button ${selectedEmotion === emotion ? 'selected' : ''}`}
                 onClick={() => {
                   setSelectedEmotion(emotion); // Update the selected emotion
-                  submitFeedback(); // Submit feedback
+                  setTimeout(() => submitFeedback(), 0); // Delay submitFeedback to ensure state is updated
                 }}
               >
                 <img src={emotionImages[emotion]} alt={emotion} />
