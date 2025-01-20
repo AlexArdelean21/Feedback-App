@@ -29,15 +29,15 @@ const StudentPage = () => {
   };
   
   const submitFeedback = async () => {
-    if (!selectedEmotion) {
+    if (!emotion) {
       toast.error('Please select an emotion before submitting.');
       return;
     }
   
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/feedback`, {
-        emotion: selectedEmotion,
-        activityAccessCode: activity.accessCode, // Ensure this matches the backend's expectation
+        emotion: emotion,
+        activityAccessCode: activity.accessCode, 
       });
       toast.success('Feedback submitted successfully!');
       setSelectedEmotion('');
@@ -80,12 +80,9 @@ const StudentPage = () => {
           <div className="emoticons">
             {Object.keys(emotionImages).map((emotion) => (
               <button
-                key={emotion}
-                className={`emotion-button ${selectedEmotion === emotion ? 'selected' : ''}`}
-                onClick={() => {
-                  setSelectedEmotion(emotion); // Update the selected emotion
-                  setTimeout(() => submitFeedback(), 0); // Delay submitFeedback to ensure state is updated
-                }}
+              key={emotion}
+              className={`emotion-button ${selectedEmotion === emotion ? 'selected' : ''}`}
+              onClick={() => submitFeedback(emotion)} // Pass the emotion directly
               >
                 <img src={emotionImages[emotion]} alt={emotion} />
               </button>

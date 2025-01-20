@@ -13,6 +13,7 @@
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s;
+    z-index: 1;
   }
   
   .split.left {
@@ -42,6 +43,7 @@
     padding: 20px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2;
   }
   
   .center-question h1 {
